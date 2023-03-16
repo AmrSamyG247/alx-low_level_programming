@@ -2,6 +2,8 @@
 
 /**
  *Task #5Hello, printf Alx school by Amr Samy
+ *main - Entry point
+ *Return: Always 0 (Success)
  */
 
 int main(void)
