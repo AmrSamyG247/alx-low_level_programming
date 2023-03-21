@@ -1,31 +1,29 @@
 #include <stdio.h>
+
 /**
- * main - main function
- *
- * Return: nothing
+ * main - print sum of even Fionacci sequence up to 4,000,000
+ * Return: 0
  */
+
 int main(void)
 {
-	int counter = 2;
+	int sum_of_evens = 0;
+	int a;
+	int b;
+	int sum = 1;
 
-	float a = 1;
-	float b = a + 1;
-	float c = a + b;
+	a = 1;
+	b = 1;
 
-	printf("%.0f, ", a);
-	printf("%.0f, ", b);
-	while (counter < 98)
+	while (b < 4000000)
 	{
-		counter++;
-		printf("%.0f", c);
+		sum = a + b;
 		a = b;
-		b = c;
-		c = a + b;
-		if (counter < 98)
-		{
-			printf(", ");
-		}
+		b = sum;
+		if ((sum <= 4000000) && (sum % 2 == 0))
+			sum_of_evens += sum;
 	}
-	printf("\n");
+	printf("%d\n", sum_of_evens);
+
 	return (0);
 }
