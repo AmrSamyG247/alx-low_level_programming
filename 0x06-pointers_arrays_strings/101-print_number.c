@@ -1,43 +1,35 @@
 #include "main.h"
+
 /**
- * print_number - prints number
- * @n:integer to convert to character
- *
+ * print_number - print an integer, without using long, arrays, or pointers
+ * @n: number to be printed
  */
+
 void print_number(int n)
 {
-	unsigned int abs;
-	int mult = 1;
-	unsigned int abSCount;
-	int i;
-	int c = 0;
+	unsigned int tens, digit, positive = n;
+	double t_beg = 1;
 
 	if (n == 0)
-	{
 		_putchar('0');
-	}
-	if (n < 0)
+	else
 	{
-		_putchar('-');
-		n += 1;
-		n *= -1;
-		n++;
-	}
-	abs = n;
-	abSCount = n;
+		if (n < 0)
+		{
+			positive = n * -1;
+			_putchar('-');
+		}
 
-	while (abSCount > 0)
-	{
-		abSCount /= 10;
-		c++;
-	}
-	for (i = 0; i < c - 1; i++)
-		mult *= 10;
+		while (t_beg <= positive)
+			t_beg *= 10;
+		tens = t_beg / 10;
 
-	for (i = 0; i < c; i++)
-	{
-		_putchar((abs / mult) + '0');
-		abs = abs % mult;
-		mult /= 10;
+		while (tens >= 1)
+		{
+			digit = positive / tens;
+			_putchar(digit + '0');
+			positive = (positive - (tens * digit));
+			tens /= 10;
+		}
 	}
 }
