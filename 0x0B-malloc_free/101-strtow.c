@@ -1,83 +1,79 @@
 #include "main.h"
+#include <string.h>
 /**
- * helper - helps function
- * @word: wordcount
- * @len: length
- * @str: string to go through
- * @s: array you are assigning
- * Return: char value
- */
-char **helper(int word, int len, char *str, char **s)
-{
-	int i, k, j;
-
-	j = 0;
-	for (i = 0; i < word; i++)
-	{
-		k = 0;
-		for (; j < len; j++)
-		{
-			if (str[0] != ' ' || str[j] != ' ')
-			{
-				s[i][k] = str[j];
-				k++;
-			}
-			if (j != 0 && str[j] == ' ' && str[j - 1] != ' ')
-			{
-				j++;
-				break;
-			}
-		}
-		s[i][k + 1] = '\0';
-	}
-	s[word + 1] = NULL;
-	return (s);
-}
-/**
- * strtow - string to words
- * @str: string to check
- * Return: return char value
+ * strtow - split a string into words
+ * @str: the string
+ *
+ * Return: double pointer
  */
 char **strtow(char *str)
 {
-	int len, i, j, size, k, word;
-	char **s;
+	int x = 0, i = 0;
+	char **strtow;
 
-	if (str == NULL)
+	if (str == NULL || *str == '\0')
 		return (NULL);
-	len = 0;
-	word = 0;
-	while (str[len] != '\0')
+	while (str[i] == ' ')
+		i++;
+	if (str[i] != ' ' && str[i] != '\0')
+		x = 1;
+	for (; str[i] != '\0'; i++)
 	{
-		if (str[0] != ' ')
-		word++;
-		if (str[len] != ' ' && str[len - 1] == ' ' && len != 0)
-			word++;
-		len++;
-	}
-	s = (char **)malloc(sizeof(char *) * word + 1);
-	if (s == NULL)
-		return (NULL);
-	j = 0;
-	for (i = 0; i < word; i++)
-	{
-		size = 0;
-		for (; j < len; j++)
+		if (str[i] == ' ')
 		{
-			if (str[0] != ' ' || str[j] != ' ')
-				size++;
-			if (str[j] == ' ' && size > 0)
-				break;
-		}
-		printf("%d\n", size);
-		s[i] = (char *)malloc(sizeof(char) * size + 1);
-		if (s[i] == NULL)
-		{
-			for (k = i - 1; k >= 0; k--)
-				free(s[k]);
-			free(s);
+			if (str[i + 1] == ' ' || str[i + 1] == '\0')
+				continue;
+			x++;
 		}
 	}
-	s = helper(word, len, str, s);
-	return (s);
+	strtow = malloc((x + 1) * sizeof(char *));
+	if (x == 0)
+		strtow = NULL;
+	if (strtow == NULL)
+		return (NULL);
+	return (_strtow(strtow, str, x));
+}
+/**
+ * _strtow - split the string into words
+ * @strtow: parameter 1
+ * @str: parameter2
+ * @x: parameter 3
+ * Return: pointer to pointers of words
+ */
+char **_strtow(char **strtow, char *str, int x)
+{
+	int i = 0, j = 0, k, length;
+
+	while (i < x)
+	{
+		length = 0;
+		while (str[j] == ' ')
+			j++;
+		k = j;
+		while (str[k] != ' ' && str[k] != '\0')
+		{
+			length++;
+			k++;
+		}
+		strtow[i] = malloc(length + 1);
+		if (strtow[i] == NULL)
+		{
+			while (i--)
+				free(strtow[i]);
+			free(strtow);
+			return (NULL);
+		}
+		k = 0;
+		length = j + length;
+		while (j < length)
+		{
+			strtow[i][k] = str[j];
+			j++;
+			k++;
+		}
+		strtow[i][k] = '\0';
+		i++;
+	}
+	strtow[i] = NULL;
+	return (strtow);
 }

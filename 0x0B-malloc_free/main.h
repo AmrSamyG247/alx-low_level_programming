@@ -9,7 +9,7 @@ char *str_concat(char *s1, char *s2);
 int **alloc_grid(int width, int height);
 void free_grid(int **grid, int height);
 char *argstostr(int ac, char **av);
-char **helper(int word, int len, char *str, char **s);
 char **strtow(char *str);
+char **_strtow(char **strtow, char *str, int x);
 
 #endif
