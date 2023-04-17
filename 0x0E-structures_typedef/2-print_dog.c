@@ -1,9 +1,8 @@
 #include "dog.h"
 /**
- * struct dog - structure of dog
- * @name: name of dog
- * @age: age of dog
- * @owner: owner of dog
+ * main - check the code
+ *
+ * Return: Always 0.
  */
 void print_dog(struct dog *d)
 {
