@@ -1,8 +1,7 @@
 #include "dog.h"
 /**
- * main - check the code
- *
- * Return: Always 0.
+ * print_dog - prints dog variables
+ * @d: struct of dog
  */
 void print_dog(struct dog *d)
 {
