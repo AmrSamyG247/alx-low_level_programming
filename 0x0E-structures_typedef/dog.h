@@ -1,5 +1,6 @@
 #ifndef _AMR_A_
 #define _AMR_A_
+#include <stdio.h>
 /**
  * struct dog - structure of dog
  * @name: name of dog
