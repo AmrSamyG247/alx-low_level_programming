@@ -1,4 +1,5 @@
 #include "main.h"
+#include "2-get_bit.c"
 /**
  * set_bit - sets a bit
  * @n: integer to grab 
@@ -6,15 +7,10 @@
  */
 int set_bit(unsigned long int *n, unsigned int index)
 {
-	unsigned int maximum;
-	unsigned long int mask = 1;
-
-	maximum = (sizeof(unsigned long int) * 8);
-	if (index > maximum)
+	if (index > 32)
 		return (-1);
-
-	mask <<= index;
-	*n = (*n | mask);
-
-	return (1);
+	(*n) |= 1 << index;
+	if (get_bit((*n), index) == 1)
+		return (1);
+	return (-1);
 }
